@@ -8,9 +8,9 @@ assignees: ''
 ---
 
 ### ISSUE
-- Group : 'client', 'server', 'sr'
-- Type : 'bug', 'feature', 'delete'
-- Detail : 
+- Group : `client`, `server`, `sr`
+- Type : `bug`, `feature`, `delete`
+- Detail : ``
 
 ### TODO
 1. [ ] Job1
@@ -27,7 +27,7 @@ assignees: ''
 ### '3h'
 
 ### Labels
-- Estimated time : 'E:1h'
-- Group : 'client', 'server'
-- Spirnt : 'Sprint __NUMBER__'
-- Urgencty : 'High, 'Middle', 'Low'
+- Estimated time : `E:1h`
+- Group : `client`, `server`
+- Sprint : `Sprint __NUMBER__`
+- Urgency : `High`, `Middle`, `Low`
