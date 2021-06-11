@@ -4,14 +4,17 @@ const cors = require("cors");
 const https = require("https");
 const fs = require("fs");
 
+const usersRouter = require("./routes/users");
+const groupsRouter = require("./routes/groups");
+
 require("./models");
 
-// const userControllers = require("./controllers/user");
-// const groupControllers = require("./controllers/group");
+//const userControllers = require("./controllers/users/SignOut");
+//const groupControllers = require("./controllers/group");
 
 const app = express();
-
-const port = 8000;
+app.use(express.json());
+const port = 4000;
 
 //express-session 설정
 app.use(
@@ -30,8 +33,6 @@ app.use(
   })
 );
 
-app.use(express.json());
-
 //cors 설정
 app.use(
   cors({
@@ -41,29 +42,9 @@ app.use(
   })
 );
 
-// app.get("/get", (req, res) => {
-//   // console.log(req);
-//   res.status(200).send("OK");
-// });
-//user-endpoints
-// app.get("/user/userinfo", userControllers.userInfo);
-// app.post("/user/signup/isvalidusername", userControllers.validUsername);
-// app.post("/user/signup/isvalidemail", userControllers.validEmail);
-// app.post("/user/signup", userControllers.signUp);
-// app.post("/user/sigin", userControllers.signIn);
-// app.post("/user/signout", userControllers.signOut);
-// app.post("/user/socialsignin", userControllers.socialSignIn);
-// app.post("/user/updateuserinfo", userControllers.updateUserInfo);
-// app.post("/user/updateuserinfo/preference", userControllers.updateUserPreference);
-
-//group-endpoints
-// app.get("/group/groupinfo", groupControllers.groupInfo);
-// app.post("/group/creategroup", groupControllers.createGroup);
-// app.post("/group/deletegroup", groupControllers.deleteGroup);
-// app.post("/group/joingroup", groupControllers.joinGroup);
-// app.post("/group/unjoingroup", groupControllers.unjoinGroup);
-// app.post("/group/updategroupinfo", groupControllers.updateGroupInfo);
-// app.post("/group/imminentgroupinfo", groupControllers.imminentGroupInfo);
+//router 연결
+app.use("/user", usersRouter);
+app.use("/group", groupsRouter);
 
 //https-server
 const server = https
