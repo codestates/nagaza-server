@@ -1,43 +1,50 @@
 const express = require("express");
-const session = require('express-session');
-const cors = require('cors');
-const https = require('https');
-const fs = require('fs');
+const session = require("express-session");
+const cors = require("cors");
+const https = require("https");
+const fs = require("fs");
 
 require("./models");
 
-//const userControllers = require("./controllers/user");
-//const groupControllers = require("./controllers/group");
+// const userControllers = require("./controllers/user");
+// const groupControllers = require("./controllers/group");
 
 const app = express();
 
-const port = 80;
+const port = 8000;
 
 //express-session 설정
 app.use(
   session({
-    secret: '@nagaza',
+    secret: "@nagaza",
     resave: false,
     saveUninitialized: true,
     cookie: {
-      domain: 'localhost',
-      path: '/',
+      domain: "localhost",
+      path: "/",
       maxAge: 24 * 60 * 60 * 1000,
-      sameSite: 'none',
+      sameSite: "none",
       httpOnly: true,
       secure: true,
-    }
+    },
   })
-)
+);
 
 app.use(express.json());
 
 //cors 설정
-app.use(cors({
-  origin: true,
-  credentials: true
-}))
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "OPTIONS"],
+    credentials: true,
+  })
+);
 
+// app.get("/get", (req, res) => {
+//   // console.log(req);
+//   res.status(200).send("OK");
+// });
 //user-endpoints
 // app.get("/user/userinfo", userControllers.userInfo);
 // app.post("/user/signup/isvalidusername", userControllers.validUsername);
@@ -60,15 +67,15 @@ app.use(cors({
 
 //https-server
 const server = https
-    .createServer(
-      {
-        key: fs.readFileSync(__dirname + `/` + 'key.pem', 'utf-8'),
-        cert: fs.readFileSync(__dirname + `/` + 'cert.pem', 'utf-8'),
-      },
-      app
-    )
-    .listen(port, () => {
-        console.log(`server listen in ${port}`)
-    });
+  .createServer(
+    {
+      key: fs.readFileSync(__dirname + `/` + "key.pem", "utf-8"),
+      cert: fs.readFileSync(__dirname + `/` + "cert.pem", "utf-8"),
+    },
+    app
+  )
+  .listen(port, () => {
+    console.log(`server listen in ${port}`);
+  });
 
 module.exports = server;
