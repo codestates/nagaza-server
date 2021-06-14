@@ -6,7 +6,7 @@ module.exports = {
 
         if(groupId && userId) {
             const isParticipate = await group_user.findOne({ where: { group_id: groupId, user_id: userId }})
-            const groupCount = await group_user.count({ where: { group_id = groupId } })
+            const groupCount = await group_user.count({ where: { group_id: groupId } })
             //console.log(groupCount)
 
             if(!isParticipate) { //참가하려는 회원이 이미 참가중이 아닐 경우

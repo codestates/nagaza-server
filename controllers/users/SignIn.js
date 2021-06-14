@@ -18,7 +18,7 @@ module.exports = {
         req.session.userId = userInfo.id;
 
         // 어떤 group에 속해있는지, 또 해당 그룹의 참가자인지 관리자인지
-        const groupInfo = await group.findOne({
+        const groupInfo = group.findOne({
           where: {
             admin: userInfo.id,
           },

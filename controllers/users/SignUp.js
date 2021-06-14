@@ -30,7 +30,7 @@ module.exports = {
         location_id: location.id
       })
       .then(newUser => {
-        await category_user.create({
+        category_user.create({
           user_id: newUser.id,
           category_id: req.body.preference
         })
