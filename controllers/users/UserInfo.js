@@ -9,6 +9,6 @@ module.exports = {
     const result = await user.findOne({
       where: { id: req.session.userId },
     });
-    res.status(200).send({ userInfo: result }, { message: "ok" });
+    res.status(200).send({ userInfo: result, message: "ok" });
   },
 };
