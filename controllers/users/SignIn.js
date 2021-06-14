@@ -9,7 +9,7 @@ module.exports = {
         password: req.body.password,
       },
     });
-
+    
     if (!userInfo) {
       // 해당 email과 pw가 일치하는 정보가 DB에 없음 -> 둘 중에 하나는 틀림
       res.status(401).send({ message: "유효하지 않은 이메일 또는 비밀번호입니다." });

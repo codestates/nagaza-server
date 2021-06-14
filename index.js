@@ -9,9 +9,6 @@ const groupsRouter = require("./routes/groups");
 
 require("./models");
 
-//const userControllers = require("./controllers/users/SignOut");
-//const groupControllers = require("./controllers/group");
-
 const app = express();
 app.use(express.json());
 const port = 4000;
