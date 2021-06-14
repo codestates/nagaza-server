@@ -10,7 +10,7 @@ module.exports = {
       }
     })
     .then(result => {
-      await group_user.destroy({
+      group_user.destroy({
         where: {
           group_id: groupId
         }
