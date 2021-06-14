@@ -1,4 +1,4 @@
-const { user } = require("../../models");
+const { user, group } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
@@ -14,7 +14,11 @@ module.exports = {
     } else {
       req.session.save(() => {
         req.session.userId = userInfo.id;
-        res.status(200).send(userInfo, { message: "ok" });
+
+        const groupInfo = group.findAll({
+          where: { admin: userInfo.id }
+        })
+        res.status(200).send({ message: "ok", userInfo: userInfo, groupInfo: groupInfo });
       });
     }
   },
