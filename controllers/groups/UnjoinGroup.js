@@ -2,18 +2,14 @@ const { group_user } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
-    const isMatch = await group_user.findOne({
+    const { groupId, userId } = req.body
+    await group_user.destroy({
       where: {
-        group_id: req.body.groupId,
-        user_id: req.body.userId,
+        group_id: groupId,
+        user_id: userId,
       },
-    });
-
-    if (isMatch.user_id !== req.body.id) {
-      res.status(401).send("유효한 사용자가 아닙니다.");
-    }
-
-    req.session.destroy();
-    res.status(200).send("성공적으로 그룹을 탈퇴했습니다.");
-  },
+    })
+    .then(result => res.status(200).send({ message: "성공적으로 그룹을 탈퇴했습니다"}))
+    .catch(err => res.status(401).send({ message: "error"}))
+  }
 };

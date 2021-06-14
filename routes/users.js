@@ -5,7 +5,7 @@ const { usersController } = require('../controllers');
 
 router.get("/userinfo", usersController.userInfo.get);
 router.post("/signup/isvalidusername", usersController.isValidUserName.post);
-router.post("/signup/isvalidemail", userControllers.isValidEmail.post);
+router.post("/signup/isvalidemail", usersController.isValidEmail.post);
 router.post("/signup", usersController.signUp.post);
 router.post("/sigin", usersController.signIn.post);
 router.post("/signout", usersController.signOut.post);

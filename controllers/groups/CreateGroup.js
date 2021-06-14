@@ -19,19 +19,19 @@ module.exports = {
             const groupInfo = await group.findOne({ where: { name: groupName } })
 
             if(groupInfo) {
-                res.status(409).send({ message: "동일한 그룹명이 존재합니다" }) //그룹명은 중복될 수 없습니다
+                return res.status(409).send({ message: "동일한 그룹명이 존재합니다" }) //그룹명은 중복될 수 없습니다
             } else {
-                await location.create({ //위치 정보를 추가합니다
+                return await location.create({ //위치 정보를 추가합니다
                     latitude: groupLocation[0],
                     longitude: groupLocation[1]
                 })
                 .then(result => {
-                    group.create({ //그룹을 추가합니다
+                    return await group.create({ //그룹을 추가합니다
                         name: groupName,
                         admin: admin,
                         category_id: categoryId,
-                        startTime: startTime,
-                        endTime: endTime, 
+                        start_time: startTime,
+                        end_time: endTime, 
                         date: date, 
                         description: description,
                         location_id: result.id
@@ -42,7 +42,7 @@ module.exports = {
                     const groupId = result.id;
                     const userId = admin;
 
-                    group_user
+                    return await group_user
                     .create({ group_id = groupId, user_id = userId}) //새로 생성된 그룹의 참여자로 admin을 추가합니다
                     .then(result => res.status(201).send({ message: "ok" })) //201 Created
                     .catch(err => res.status(404).send({ message: "error" }))
