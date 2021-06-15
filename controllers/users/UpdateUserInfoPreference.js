@@ -1,12 +1,12 @@
-const { category_user } = require("../../models/category_user");
+const { category_user } = require("../../models");
 
 module.exports = {
     post: async (req, res) => {
         const { userId, newPreference } = req.body;
 
         if(newPreference && userId) {
-            await category_user.update({ preference: newPreference }, {
-                where: { id: userId }
+            await category_user.update({ category_id: newPreference }, {
+                where: { user_id: userId }
             })
             .then(result => res.status(200).send({ message: "ok", preference: newPreference }))
             .catch(err => {

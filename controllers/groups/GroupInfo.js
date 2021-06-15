@@ -1,11 +1,11 @@
-const { group } = require('../../models/group');
+const { group } = require('../../models');
 const { Op } = require('sequelize');
 
 module.exports = {
     get: async (req, res) => {
         const { categoryId, startDate, endDate } = req.body;
         
-        if(!(categoryId || startDate || endDate)) {
+        if(!categoryId) {
             res.status(404).send({ message: "error" })
         } else {
             //category는 필수항목이고 startDate와 endDate는 선택사항입니다

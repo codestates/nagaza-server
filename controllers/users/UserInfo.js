@@ -6,9 +6,11 @@ module.exports = {
     // if (!req.session.userId) {
     //   res.status(401).send("Unauthorized");
     // }
-    const result = await user.findOne({
-      where: { id: req.session.userId },
+    const userInfo = await user.findOne({
+      where: { id: req.body.userId },
     });
-    res.status(200).send({ userInfo: result, message: "ok" });
+    
+    delete userInfo.dataValues.password;
+    res.status(200).send({ userInfo: userInfo, message: "ok" });
   },
 };

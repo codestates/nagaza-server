@@ -2,7 +2,6 @@ const { user, group } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
-    // console.log(req)
     const userInfo = await user.findOne({
       where: {
         email: req.body.email,
@@ -23,6 +22,8 @@ module.exports = {
             admin: userInfo.id,
           },
         });
+
+        delete userInfo.dataValues.password;
         res.status(200).send({ userInfo: userInfo, groupInfo: groupInfo, message: "ok" });
       }); 
     }

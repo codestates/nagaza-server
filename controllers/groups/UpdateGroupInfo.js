@@ -10,20 +10,24 @@ module.exports = {
     });
 
     if (isAdmin) {
-      const groupInfo = await group.update({
+      await group.update({
         date: req.body.newDate,
         end_time: req.body.newEndTime,
         start_time: req.body.newStartTime,
         location_id: req.body.newLocationId,
-        category_id: req.body.newCatogoryId,
+        category_id: req.body.newCategoryId,
         description: req.body.newDescription,
         admin: req.body.newAdmin,
         name: req.body.newName
       }, {
-        id: req.body.groupId
+        where: { id: req.body.groupId },
+        returning: true,
+        plain: true
       })
-      
-      res.status(200).send({ message: "ok", groupInfo: groupInfo })
+      .then(groupInfo => {
+        res.status(200).send({ message: "ok", groupInfo: groupInfo })
+      })
+      .catch(err => res.status(404).send({ message: "error"}))
     } else {
       res.status(401).send("그룹 수정 권한이 없습니다.");
     }

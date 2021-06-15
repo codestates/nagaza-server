@@ -1,4 +1,4 @@
-const { user } = require("../../models/user");
+const { user } = require("../../models");
 
 //bareminimum: 회원정보 중 비밀번호만 변경 가능
 module.exports = {
