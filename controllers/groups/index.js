@@ -1,10 +1,10 @@
 module.exports = {
-    createGroup: require('./createGroup'),
-    deleteGroup: require('./deleteGroup'),
-    groupInfo: require('./groupInfo'),
-    imminentGroupInfo: require('./imminentGroupInfo'),
-    joinGroup: require('./joinGroup'),
-    unjoinGroup: require('./unjoinGroup'),
-    updateGroupInfo: require('./updateGroupInfo')
+    createGroup: require('./CreateGroup'),
+    deleteGroup: require('./DeleteGroup'),
+    groupInfo: require('./GroupInfo'),
+    imminentGroupInfo: require('./ImminentGroupInfo'),
+    joinGroup: require('./JoinGroup'),
+    unjoinGroup: require('./UnjoinGroup'),
+    updateGroupInfo: require('./UpdateGroupInfo')
   };
   
