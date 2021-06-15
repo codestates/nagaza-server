@@ -7,7 +7,7 @@ router.get("/userinfo", usersController.userInfo.get);
 router.post("/signup/isvalidusername", usersController.isValidUserName.post);
 router.post("/signup/isvalidemail", usersController.isValidEmail.post);
 router.post("/signup", usersController.signUp.post);
-router.post("/sigin", usersController.signIn.post);
+router.post("/signin", usersController.signIn.post);
 router.post("/signout", usersController.signOut.post);
 router.post("/socialsignin", usersController.socialSignIn.post);
 router.post("/updateuserinfo", usersController.updateUserInfo.post);

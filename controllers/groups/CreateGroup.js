@@ -1,10 +1,8 @@
-const { group } = require("../../models/group");
-const { group_user } = require("../../models/group_user");
-const { location } = require("../../models/location")
+const { group, group_user, location } = require("../../models");
 
 module.exports = {
     post: async (req, res) => {
-        const groupLocation = req.body.location //[latitude, longitude] 순서
+        const groupLocation = JSON.parse(req.body.location) //[latitude, longitude] 순서
         const {
             groupName,
             admin, //생성자 user_id
@@ -25,8 +23,8 @@ module.exports = {
                     latitude: groupLocation[0],
                     longitude: groupLocation[1]
                 })
-                .then(result => {
-                    group.create({ //그룹을 추가합니다
+                .then(location => {
+                    return group.create({ //그룹을 추가합니다
                         name: groupName,
                         admin: admin,
                         category_id: categoryId,
@@ -34,18 +32,14 @@ module.exports = {
                         end_time: endTime, 
                         date: date, 
                         description: description,
-                        location_id: result.id
+                        location_id: location.dataValues.id
                     })
                 })
-                .then(result => {
-                    //console.log(result)
-                    const groupId = result.id;
-                    const userId = admin;
-
+                .then(newGroup => {
                     group_user
                     .create({
-                        group_id: groupId,
-                        user_id: userId
+                        group_id: newGroup.dataValues.id,
+                        user_id: admin
                     }) //새로 생성된 그룹의 참여자로 admin을 추가합니다
                     .then(result => res.status(201).send({ message: "ok" })) //201 Created
                     .catch(err => res.status(404).send({ message: "error" }))
