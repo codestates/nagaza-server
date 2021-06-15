@@ -1,12 +1,12 @@
 module.exports = {
     isValidEmail: require('./isValidEmail'),
     isValidUserName: require('./isValidUserName'),
-    signIn: require('./signIn'),
-    signOut: require('./signOut'),
-    signUp: require('./signUp'),
-    socialSignIn: require('./socialSignIn'),
-    updateUserInfo: require('./updateUserInfo'),
-    updateUserInfoPreference: require('./updateUserInfoPreference'),
-    userInfo: require('./userInfo')
+    signIn: require('./SignIn'),
+    signOut: require('./SignOut'),
+    signUp: require('./SignUp'),
+    socialSignIn: require('./SocialSignIn'),
+    updateUserInfo: require('./UpdateUserInfo'),
+    updateUserInfoPreference: require('./UpdateUserInfoPreference'),
+    userInfo: require('./UserInfo')
   };
   
