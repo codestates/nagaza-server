@@ -1,13 +1,23 @@
-const { user } = require("../../models");
+const { user, category_user } = require("../../models");
 
-//bareminimum: 회원정보 중 비밀번호만 변경 가능
 module.exports = {
     post: async (req, res) => {
-        const { userId, newPassword } = req.body;
+        const { userId, newUserName, newEmail, newAge, newPreference } = req.body;
 
-        if(newPassword && userId) {
-            await user.update({ password: newPassword }, {
+        if(userId) {
+            await user.update({
+                username: newUserName,
+                age: newAge,
+                email: newEmail,
+            }, {
                 where: { id: userId }
+            })
+            .then(result => {
+                return category_user.update({
+                    category_id: newPreference
+                }, {
+                    where: { user_id: userId }
+                })
             })
             .then(result => res.status(200).send({ message: "ok" }))
             .catch(err => {
