@@ -1,4 +1,4 @@
-const { user } = require("../../models");
+const { user, category_user, category } = require("../../models");
 
 module.exports = {
   get: async (req, res) => {
@@ -6,11 +6,34 @@ module.exports = {
     // if (!req.session.userId) {
     //   res.status(401).send("Unauthorized");
     // }
-    const userInfo = await user.findOne({
-      where: { id: req.body.userId },
-    });
-    
-    delete userInfo.dataValues.password;
-    res.status(200).send({ userInfo: userInfo, message: "ok" });
-  },
-};
+    await user
+      .findOne({
+        where: { id: req.body.userId },
+      })
+      .then((userInfo) => {
+        // if (!userInfo) {
+        //   res.status(401).send("Unauthorized")
+        // } else {
+        return category_user.findOne({
+          where: {
+            user_id: userInfo.id
+          }
+        })
+      // })
+      .then((category_user) => {
+        // console.log(category_user)
+         return category.findOne({
+          where: {
+            id: category_user.dataValues.category_id
+          }
+        })
+      })
+      .then((category) => {
+        // console.log(category)
+        delete userInfo.dataValues.password;
+        res.status(200).send({ userInfo: userInfo, category: category, message: "ok" });
+      });
+    // }
+  })
+}
+}
