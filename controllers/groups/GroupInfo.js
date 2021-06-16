@@ -1,5 +1,5 @@
-const { group } = require('../../models');
-const { Op } = require('sequelize');
+const { group } = require("../../models");
+const { Op } = require("sequelize");
 
 module.exports = {
     get: async (req, res) => {
@@ -27,5 +27,6 @@ module.exports = {
                 res.status(200).send({ message: "ok", groupInfo: groupInfos })
             }
         }
-    }
+     }
+  },
 };
