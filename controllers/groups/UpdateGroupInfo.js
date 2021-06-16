@@ -14,7 +14,7 @@ module.exports = {
         date: req.body.newDate,
         end_time: req.body.newEndTime,
         start_time: req.body.newStartTime,
-        location_id: req.body.newLocationId,
+        location: req.body.newLocation,
         category_id: req.body.newCategoryId,
         description: req.body.newDescription,
         admin: req.body.newAdmin,
