@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     admin: DataTypes.INTEGER,
     description: DataTypes.STRING,
     category_id: DataTypes.INTEGER,
-    location_id: DataTypes.INTEGER,
+    location: DataTypes.STRING,
     start_time: DataTypes.TIME,
     end_time: DataTypes.TIME,
     date: DataTypes.DATEONLY

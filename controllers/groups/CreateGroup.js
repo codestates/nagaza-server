@@ -1,8 +1,7 @@
-const { group, group_user, location } = require("../../models");
+const { group, group_user } = require("../../models");
 
 module.exports = {
     post: async (req, res) => {
-        const groupLocation = JSON.parse(req.body.location) //[latitude, longitude] 순서
         const {
             groupName,
             admin, //생성자 user_id
@@ -11,20 +10,16 @@ module.exports = {
             endTime, //날짜를 제외한 종료시간
             date, //시간을 제외한 년-월-일 정보
             description, //description은 공란일 경우 빈 문자열로 받습니다
+            location
         } = req.body;
         
-        if(groupName && admin && categoryId && startTime && endTime && date && description && groupLocation) {
+        if(groupName && admin && categoryId && startTime && endTime && date && description && location) {
             const groupInfo = await group.findOne({ where: { name: groupName } })
 
             if(groupInfo) {
                 return res.status(409).send({ message: "동일한 그룹명이 존재합니다" }) //그룹명은 중복될 수 없습니다
             } else {
-                await location.create({ //위치 정보를 추가합니다
-                    latitude: groupLocation[0],
-                    longitude: groupLocation[1]
-                })
-                .then(location => {
-                    return group.create({ //그룹을 추가합니다
+                await group.create({ //그룹을 추가합니다
                         name: groupName,
                         admin: admin,
                         category_id: categoryId,
@@ -32,9 +27,8 @@ module.exports = {
                         end_time: endTime, 
                         date: date, 
                         description: description,
-                        location_id: location.dataValues.id
+                        location: location
                     })
-                })
                 .then(newGroup => {
                     group_user
                     .create({

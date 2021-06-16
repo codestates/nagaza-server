@@ -20,8 +20,8 @@ module.exports = {
       category_id: {
         type: Sequelize.INTEGER
       },
-      location_id: {
-        type: Sequelize.INTEGER
+      location: {
+        type: Sequelize.STRING
       },
       start_time: {
         type: Sequelize.TIME

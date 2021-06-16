@@ -1,4 +1,4 @@
-const { user, location, category_user } = require("../../models");
+const { user, category_user } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
@@ -13,21 +13,14 @@ module.exports = {
     ) {
       res.status(422).send("가입정보가 충분하지 않습니다.");
     } else {
-      const groupLocation = JSON.parse(req.body.location)
-
-      await location.create({
-        latitude: groupLocation[0],
-        longitude: groupLocation[1]
-      })
-      .then(location => 
-        user.create({
+      await user.create({
           gender: req.body.gender,
           username: req.body.userName,
           password: req.body.password,
           email: req.body.email,
           age: req.body.age,
-          location_id: location.dataValues.id
-      }))
+          location: req.body.location
+      })
       .then(newUser => {
         category_user.create({
           user_id: newUser.dataValues.id,

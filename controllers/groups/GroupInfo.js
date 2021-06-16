@@ -6,7 +6,8 @@ module.exports = {
         const { categoryId, startDate, endDate } = req.body;
         
         if(!categoryId) {
-            res.status(404).send({ message: "error" })
+            const groupInfos = await group.findAll(); 
+            res.status(200).send({ message: "ok", groupInfo: groupInfos })
         } else {
             //category는 필수항목이고 startDate와 endDate는 선택사항입니다
             if(!(startDate && endDate)) {
