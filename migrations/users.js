@@ -29,8 +29,8 @@ module.exports = {
       gender: {
         type: Sequelize.STRING
       },
-      location_id: {
-        type: Sequelize.INTEGER
+      location: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
