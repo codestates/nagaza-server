@@ -2,6 +2,7 @@ const { group, group_user } = require("../../models");
 
 module.exports = {
     post: async (req, res) => {
+        console.log(req.body)
         const {
             groupName,
             admin, //생성자 user_id
