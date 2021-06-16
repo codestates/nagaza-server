@@ -2,13 +2,14 @@ const { user, category_user } = require("../../models");
 
 module.exports = {
     post: async (req, res) => {
-        const { userId, newUserName, newEmail, newAge, newPreference } = req.body;
+        const { userId, newUserName, newEmail, newAge, newPreference, newLocation } = req.body;
 
         if(userId) {
             await user.update({
                 username: newUserName,
                 age: newAge,
                 email: newEmail,
+                location: newLocation
             }, {
                 where: { id: userId }
             })
