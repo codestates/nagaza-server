@@ -1,5 +1,6 @@
 module.exports = {
     post: (req, res) => {
+        console.log(req)
         console.log(req.session)
         if(req.session) {
             req.session.destroy();
