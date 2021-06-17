@@ -38,15 +38,6 @@ module.exports = {
       // })
       // .then(res => console.log(res))
 
-      // user.create({
-      //   username: '',
-      //   email: '',
-      //   password: '',
-      //   age: '',
-      //   gender: '',
-      //   location: '',
-      //   social_id: response.data.access_token
-      // })
       
       res.status(200).send({ accessToken: access_token })
       

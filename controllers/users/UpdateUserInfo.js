@@ -11,18 +11,19 @@ module.exports = {
                 email: newEmail,
                 location: newLocation
             }, {
-                where: { id: userId }
+                where: { id: userId },
             })
-            .then(result => {
+            .then(userInfo => {
+                console.log(userInfo)
                 return category_user.update({
                     category_id: newPreference
                 }, {
                     where: { user_id: userId }
                 })
             })
-            .then(result => res.status(200).send({ message: "ok" }))
+            .then(category => res.status(200).send({ message: "ok" }))
             .catch(err => {
-                res.send(404).send({ message: "error" })
+                res.status(404).send({message: "error"})
             });
         } else {
             //422 Unprocessable Entity
