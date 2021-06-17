@@ -31,12 +31,13 @@ module.exports = {
                         location: location
                     })
                 .then(newGroup => {
-                    group_user
+                    // console.log(groupInfo)
+                    return group_user
                     .create({
                         group_id: newGroup.dataValues.id,
                         user_id: admin
                     }) //새로 생성된 그룹의 참여자로 admin을 추가합니다
-                    .then(result => res.status(201).send({ message: "ok" })) //201 Created
+                    .then((result) => res.status(201).send({ message: "ok", groupInfo: newGroup, groupId: result })) //201 Created
                     .catch(err => res.status(404).send({ message: "error" }))
                 })
                 .catch(err => res.status(400).send({ message: "error" }));

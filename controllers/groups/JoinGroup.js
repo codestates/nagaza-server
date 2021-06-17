@@ -1,4 +1,4 @@
-const { group_user } = require('../../models');
+const { group, group_user } = require('../../models');
 
 module.exports = {
     post: async (req, res) => {
@@ -12,7 +12,15 @@ module.exports = {
                 if(groupCount < 4) { //그룹 정원(1~4명)
                     await group_user
                     .create({ group_id: groupId, user_id: userId })
-                    .then(result => res.status(200).send({ message: "ok" }))
+                    .then((groupId) => {
+                        console.log(groupId)
+                        return group.findOne({
+                            where: {
+                                id: groupId.dataValues.group_id
+                            }
+                        })
+                    })
+                    .then(result => res.status(200).send({ message: "ok", groupInfo: result, groupId: groupId }))
                     .catch(err => res.status(404).send({ message: "error" }))
                 } else {
                     res.status(409).send({ message: "그룹의 정원이 초과되었습니다"});
