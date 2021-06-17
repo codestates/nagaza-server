@@ -7,12 +7,13 @@ module.exports = {
         where: { id: req.body.userId },
       })
       .then((userInfo) => {
-         return category_user.findOne({
+        return category_user.findOne({
           where: {
             user_id: userInfo.id
           }
         })
       .then((category_user) => {
+        // console.log(category_user)
          return category.findOne({
           where: {
             id: category_user.dataValues.category_id
@@ -20,6 +21,7 @@ module.exports = {
         })
       })
       .then((category) => {
+        // console.log(category)
         delete userInfo.dataValues.password;
         res.status(200).send({ userInfo: userInfo, category: category, message: "ok" });
       });
