@@ -40,5 +40,6 @@
 
 # 나가자!
 
-client 👉 [github.com/codestates/nagaza-client](github.com/codestates/nagaza-client)
+Main Wiki 👉 [github.com/codestates/nagaza-client/wiki](github.com/codestates/nagaza-client/wiki)
 
+Client Repository 👉 [github.com/codestates/nagaza-client](github.com/codestates/nagaza-client)
