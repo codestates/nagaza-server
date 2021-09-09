@@ -40,5 +40,6 @@
 
 # 나가자!
 
-
+# 링크
+client 👉 [github.com/codestates/nagaza-client](github.com/codestates/nagaza-client)
 
